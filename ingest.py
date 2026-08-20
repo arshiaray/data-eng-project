@@ -93,14 +93,14 @@ def fetch_store_meals(category: str, cursor, upsert_query):
         print(f"Skipping category {category} due to API error. Status: {response.status_code}")
         return 0
 
-    meals_summary = response.json().get("meals', [])
+    meals_summary = response.json().get("meals", [])
     if not meals_summary:
         print(f"No meals found for category {category}.")
         return 0
 
     meals_processed = 0
     for meal in meals_summary:
-        meal_id = meal_item["idMeal']
+        meal_id = meal["idMeal"]
         detail_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={meal_id}"
         detail_response = requests.get(detail_url)
 
@@ -130,6 +130,40 @@ def fetch_store_meals(category: str, cursor, upsert_query):
     return meals_processed
 
     
+def main_pipeline():
+    """Main pipeline function that discovers categories and ingests all the recipes into the database."""
+    initialise_db()
 
+    categories = fetch_categories()
+    if not categories:
+        print("No categories found. Pipeline terminating.")
+        return
+    
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    upsert_query = """
+        INSERT INTO meals (meal_id, meal_name, category, area, instructions, ingredients, thumbnail_url)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (meal_id) DO UPDATE SET
+            meal_name = EXCLUDED.meal_name,
+            category = EXCLUDED.category,
+            area = EXCLUDED.area,
+            instructions = EXCLUDED.instructions,
+            ingredients = EXCLUDED.ingredients,
+            thumbnail_url = EXCLUDED.thumbnail_url;
+    """
+
+    total_records = 0
+    for category in categories:
+        count = fetch_store_meals(category, cursor, upsert_query)
+        total_records += count
+        conn.commit()  # Commit after each category to save progress
+
+    cursor.close()
+    conn.close()
+    print(f"\nPipeline complete! Successfully ingested/updated {total_records} total recipes across all categories.")
 
     
+if __name__ == "__main__":
+    main_pipeline()
