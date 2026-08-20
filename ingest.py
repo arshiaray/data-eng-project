@@ -27,22 +27,24 @@ def get_connection():
 
 
 def initialise_db():
-    """Creates the meals table in the database""
+    """Creates the meals table in PostgreSQL DB."""
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS meals (
-            meal_id VARCHAR(20) PRIMARY KEY,
-            meal_name VARCHAR(255) NOT NULL,
-            category VARCHAR(100),
-            area VARCHAR(100),
-            instructions TEXT,
-            ingredients JSONB,
-            thumbnail_url TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-        );
-    """)
+    
+    query = """
+    CREATE TABLE IF NOT EXISTS meals (
+        meal_id VARCHAR(20) PRIMARY KEY,
+        meal_name VARCHAR(255) NOT NULL,
+        category VARCHAR(100),
+        area VARCHAR(100),
+        instructions TEXT,
+        ingredients JSONB,
+        thumbnail_url TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """
+    
+    cursor.execute(query)
     conn.commit()
     cursor.close()
     conn.close()
