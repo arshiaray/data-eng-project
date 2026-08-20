@@ -48,4 +48,17 @@ def initialise_db():
     conn.close()
 
 
+def extract_ingredients(details: dict) -> list[dict]:
+    """ Extracts ingredients and their measures from messy JSON format into a structured list of dictionaries. """
+    ingredients = []
+    for i in range(1, 21): # API is hardcoded to have a max of 20 ingredients
+        ingredient = details.get(f"strIngredient{i}")
+        measure = details.get(f"strMeasure{i}")
+    
+        if ingredient and ingredient.strip(): #checks ingredient is not empty
+            ingredients.append({
+                "ingredient": ingredient.strip(),
+                "measure": measure.strip() if measure else "" 
+            })
 
+    return ingredients
