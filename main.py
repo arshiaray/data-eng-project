@@ -30,3 +30,49 @@ def get_db_connection():
         print(f"Error connecting to the database: {e}")
         return None
 
+
+#check endpoint connection 
+@app.get("/")
+def read_root():
+    return {"message": "Recipe API is live and connected to PostgreSQL!"}
+
+#recipe collection endpoint
+@app.get("/recipes")
+def get_recipes(category: str = None, limit: int =10):
+    """Fetches recipes from the DB based on an optional category and a limit"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if category:
+        query = "SELECT meal_id, meal_name, category, area, thumbnail_url FROM meals WHERE LOWER(category) = LOWER(%s) LIMIT %s;"
+        cursor.execute(query, (category, limit))
+    else:
+        query = "SELECT meal_id, meal_name, category, area, thumbnail_url FROM meals LIMIT %s;"
+        cursor.execute(query, (limit,))
+
+    recipes = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    return {"count": len(recipes), "recipes": recipes}
+
+
+#single recipe endpoint
+@app.get("/recipes/{meal_id}")
+def get_recipe_by_id(meal_id: str):
+    """Fetches full details for a single recipe based on its meal_id"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    query = "SELECT * FROM meals WHERE meal_id = %s;"
+    cursor.execute(query, (meal_id,))
+    recipe = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if not recipe:
+        raise HTTPException(status_code=404, detail="Recipe not found")
+
+    return recipe
+
