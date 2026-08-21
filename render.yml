@@ -1,0 +1,35 @@
+services:
+  # 1. FastAPI backend API
+  - type: web
+    name: meal-api
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: meal-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: meal-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: meal-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: meal-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: meal-db
+          property: password
+
+databases:
+  # 2. Postgres Database
+  - name: meal-db
+    databaseName: meal_db
+    user: my_user
+    plan: free
