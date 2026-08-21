@@ -9,7 +9,7 @@ app = FastAPI(title="Meal Recipe API", description="API display layer for recipe
 
 #retrieve environment variables for db connection
 DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = os.getenv("DB_PORT", "5432")
+DB_PORT = os.getenv("DB_PORT", "2323")
 DB_NAME = os.getenv("DB_NAME", "meal_db")
 DB_USER = os.getenv("DB_USER", "my_user")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "my_password")
