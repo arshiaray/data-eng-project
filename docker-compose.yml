@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+# service 1: FastAPI web app
+  api:
+    build: .
+    container_name: meal_api
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=meal_db
+      - DB_USER=my_user
+      - DB_PASSWORD=my_password
+      - DB_PORT=2323
+    depends_on:
+      postgres:
+        condition: service_started
+
+# service 2: PostgreSQL database
   postgres:
     image: postgres:15-alpine
     container_name: meal_postgres
