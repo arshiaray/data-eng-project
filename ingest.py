@@ -38,8 +38,8 @@ def initialise_db():
         meal_name VARCHAR(255) NOT NULL,
         category VARCHAR(100),
         area VARCHAR(100),
-        instructions TEXT,
         ingredients JSONB,
+        instructions TEXT,
         thumbnail_url TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
@@ -119,8 +119,8 @@ def fetch_store_meals(category: str, cursor, upsert_query):
                 details.get("strMeal"),
                 details.get("strCategory"),
                 details.get("strArea"),
-                details.get("strInstructions"),
                 json.dumps(ingredients_list),  # Convert list of dicts to JSON string
+                details.get("strInstructions"),
                 details.get("strMealThumb"),
                 ),
             )
@@ -146,7 +146,7 @@ def main_pipeline():
     cursor = conn.cursor()
 
     upsert_query = """
-        INSERT INTO meals (meal_id, meal_name, category, area, instructions, ingredients, thumbnail_url)
+        INSERT INTO meals (meal_id, meal_name, category, area, ingredients, instructions, thumbnail_url)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (meal_id) DO UPDATE SET
             meal_name = EXCLUDED.meal_name,
