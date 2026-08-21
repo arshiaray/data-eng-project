@@ -11,7 +11,7 @@ services:
       - DB_NAME=meal_db
       - DB_USER=my_user
       - DB_PASSWORD=my_password
-      - DB_PORT=2323
+      - DB_PORT=5432
     depends_on:
       postgres:
         condition: service_started
@@ -25,7 +25,7 @@ services:
       POSTGRES_USER: my_user
       POSTGRES_PASSWORD: my_password
     ports:
-      - "2323:2323"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

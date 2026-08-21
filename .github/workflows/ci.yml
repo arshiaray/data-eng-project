@@ -18,7 +18,7 @@ jobs:
           POSTGRES_USER: my_user
           POSTGRES_PASSWORD: my_password
         ports:
-          - "2323:2323"
+          - "5432:5432"
         options: >-
           --health-cmd pg_isready
           --health-interval 10s

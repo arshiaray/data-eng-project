@@ -6,7 +6,7 @@ import time
 
 #db connection credentials from environment variables
 DB_HOST = os.getenv("DB_HOST", "localhost") 
-DB_PORT = os.getenv("DB_PORT", "2323")
+DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME", "meal_db")
 DB_USER = os.getenv("DB_USER", "my_user")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "my_password")
