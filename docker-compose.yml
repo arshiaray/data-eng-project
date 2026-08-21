@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres: 15-alpine
+    image: postgres:15-alpine
     container_name: meal_postgres
     environment:
       POSTGRES_DB: meal_db
-      POSTGRES_USER: my_user
-      POSTGRES_PASSWORD: my_password
+      POSTGRES_USER: de_user
+      POSTGRES_PASSWORD: de_password
     ports:
       - "5432:5432"
     volumes:
