@@ -2,6 +2,7 @@ import os
 import psycopg2
 import requests
 import json
+import time
 
 #db connection credentials from environment variables
 DB_HOST = os.getenv("DB_HOST", "localhost") 
