@@ -15,8 +15,8 @@ jobs:
         image: postgres:15
         env:
           POSTGRES_DB: meal_db
-          POSTGRES_USER: de_user
-          POSTGRES_PASSWORD: de_password
+          POSTGRES_USER: my_user
+          POSTGRES_PASSWORD: my_password
         ports:
           - "2323:2323"
         options: >-
