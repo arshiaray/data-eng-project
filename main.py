@@ -8,7 +8,7 @@ from psycopg2.extras import RealDictCursor
 app = FastAPI(title="Meal Recipe API", description="API display layer for recipes ingested into PostgreSQL database.")
 
 #retrieve environment variables for db connection
-DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_HOST = os.getenv("DB_HOST", "postgres")
 DB_PORT = os.getenv("DB_PORT", "2323")
 DB_NAME = os.getenv("DB_NAME", "meal_db")
 DB_USER = os.getenv("DB_USER", "my_user")
