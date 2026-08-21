@@ -22,3 +22,20 @@ def test_get_recipes_default_limit():
     assert "recipes" in data
     assert isinstance(data["recipes"], list)
 
+#test 3: filtering by category
+def test_get_recipes_with_category_filter():
+    """Test filtering recipes by category."""
+    response = client.get("/recipes?category=Seafood&limit=5")
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data["count"] <= 5
+    for recipe in data["recipes"]:
+        assert recipe["category"].lower() == "seafood"
+
+#test 4: error handling for non existent recipe
+def test_get_recipe_by_id_not_found():
+    """Test fetching a recipe by an ID that does not exist."""
+    response = client.get("/recipes/999999")  # assuming this ID does not exist
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Recipe not found"}
