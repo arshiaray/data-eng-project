@@ -2,7 +2,7 @@ import json
 import os
 from fastapi import FastAPI, HTTPException, Query
 import psycopg2
-from pyscopg2.extras import RealDictCursor
+from psycopg2.extras import RealDictCursor
 
 #instance of FastAPI web app
 app = FastAPI(title="Meal Recipe API", description="API display layer for recipes ingested into PostgreSQL database.")
