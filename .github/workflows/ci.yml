@@ -2,7 +2,7 @@ name: FastAPI CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" , "master"]
+    branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
@@ -15,34 +15,34 @@ jobs:
         image: postgres:15
         env:
           POSTGRES_DB: meal_db
-          POSTGRES_USER: my_user
-          POSTGRES_PASSWORD: my_password
+          POSTGRES_USER: de_user
+          POSTGRES_PASSWORD: de_password
         ports:
-          - 2323:5432
+          - "5432:5432"
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
-      steps:
-        - name: Check out repository
-          uses: actions/checkout@v3
-        
-        - name: Set up Python 3.11
-          uses: actions/setup-python@v5
-          with:
-            python-version: '3.11'
-        
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-        - name: Check Python Syntax & Compilation
-          run: |
-            python -m compileall .
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-        - name: Build Docker Container
-          run: |
-            docker compose build
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Check Python Syntax & Compilation
+        run: |
+          python -m compileall .
+
+      - name: Build Docker Container
+        run: |
+          docker compose build
