@@ -1,4 +1,4 @@
-<h3> ARCHITECTURE </h3>
+<u><h3> ARCHITECTURE </h3></u>
 <p> This project is a simple, end-to-end data pipeline that fetches recipe data from an API, stores it in a database and makes it available through a web API.</p>
 
 <p>[External Recipe API] --> [Ingestion Script] --> [Postgresql DB] --> [FastAPI Rest Layer]</p>
@@ -30,3 +30,22 @@
 <li>Render: Hosts the database and API online for free so that anyone can test the endpoints live.</li>
 </ul>
 <p> </p>
+<u><h3>STATUS AND SYSTEM CAPABILITIES</h3></u>
+<h4>What Works</h4>
+
+<ul>
+<li><b>Data Ingestion: </b>'ingest.py' fetches raw JSON from The MealDB API, extracts key fields, and loads them safely into PostgreSQL.</li>
+<li><b>Idempotent Data Loads: </b>Re-running the ingestion script safely skips existing records ('ON CONFLICT DO NOTHING') without throwing primary key errors.</li>
+<li><b>Recipe Filtering API:</b> 'GET /recipes' returns formatted JSON data and supports optional 'category' filtering (case-insensitive) and custom `limit` parameters.</li>
+<li><b>Single Recipe Lookup:</b> 'GET /recipes/{meal_id}' fetches full details for a specific recipe and returns a structured `404 Not Found` error if the ID doesn't exist.</li>
+<li><b>Database Safety and Error Handling:</b> Explicit connection handling ('try/except/finally' blocks) prevents database connection leaks and returns clean HTTP `500` JSON errors if PostgreSQL becomes unreachable.</li>
+<li><b>Automated Cloud Deployment:</b> Fully containerised with Docker and live on Render with automated deployments on every 'Git Push'</li>
+</ul>
+
+<h4>Considerations</h4>
+<ul>
+<li><b>Render Free Tier Start Ups:</b> Due to the API being hosted on Render's free tier, the web service winds down after 15 minutes of inactivity. The first request after an idle period takes around 30 seconds to a minute to respond while the container wakes up. Fortunately, the data is retained even when the web service goes to sleep.</li>
+</ul>
+
+<u><h3>HOW TO RUN</h3></u>
+<h4>Option 1: Live Cloud Demo (No Installation Required)</h4>
