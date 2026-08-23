@@ -7,7 +7,7 @@ from psycopg2.extras import RealDictCursor
 # Instance of FastAPI web app
 app = FastAPI(
     title="Meal Recipe API",
-    description="API display layer for recipes ingested into PostgreSQL database.",
+    description="API display layer for recipes ingested into the PostgreSQL database.",
 )
 
 # Retrieve environment variables for db connection
