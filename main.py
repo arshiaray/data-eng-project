@@ -44,7 +44,8 @@ def read_root():
 # Recipe collection endpoint
 @app.get("/recipes")
 def get_recipes(category: str = None, limit: int = 10):
-  """Fetches recipes from the DB based on an optional category and a limit"""
+  """Fetches recipes from the DB based on an optional category and a limit. The categories available are: Beef, Breakfast,
+   Chicken, Dessert, Goat, Lamb, Miscellaneous, Pasta, Pork, Seafood, Side, Starter, Vegan, Vegetarian """
   conn = get_db_connection()
 
   # 1. Guard check: Handle failed database connection cleanly
