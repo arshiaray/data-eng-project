@@ -74,3 +74,6 @@
 <li>Stop and remove local containers.</li>
 <ul><li>In your terminal, run: docker compose down</li></ul>
 </ol>
+
+<u><h4>IMPROVEMENTS</h4></u>
+<p>Overall, I am super happy with this project, from everything I've learned to the outcome of a set of working endpoints. With more time, these are the things I would do to improve on my project:</p>
