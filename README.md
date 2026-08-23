@@ -44,8 +44,33 @@
 
 <h4>Considerations</h4>
 <ul>
-<li><b>Render Free Tier Start Ups:</b> Due to the API being hosted on Render's free tier, the web service winds down after 15 minutes of inactivity. The first request after an idle period takes around 30 seconds to a minute to respond while the container wakes up. Fortunately, the data is retained even when the web service goes to sleep.</li>
+<li><b>Render Free Tier Start Ups:</b> Due to the API being hosted on Render's free tier, the web service winds down after 15 minutes of inactivity. The first request after an idle period takes ~50 seconds to respond while the container wakes up. Fortunately, the data is retained even when the web service goes to sleep.</li>
 </ul>
 
 <u><h3>HOW TO RUN</h3></u>
 <h4>Option 1: Live Cloud Demo (No Installation Required)</h4>
+<p>Open <a href="https://meal-api-w055.onrender.com/docs">https://meal-api-w055.onrender.com/docs</a> in your browser to inspect endpoints using Swagger UI.</p>
+<p>OR Run curl in your terminal. E.G. To find 10 recipes in the seafood category, run:</p>
+<p>curl "https://meal-api-w055.onrender.com/recipes?category=seafood&limit=10" </p>
+
+<h4>Option 2: Run Locally with Docker</h4>
+<u>Prerequisites</u>
+<ul>
+<li>Docker desktop installed and running</li>
+<li>Git</li>
+</ul>
+
+<ol>
+<li> Clone the repository.</li>
+<ul><li>In your terminal, run: git clone https://github.com/arshiaray/data-eng-project.git</li>
+<li>To change directory to project folder, run: cd data-eng-project</li></ul>
+<li>Start the docker containers.</li>
+<ul><li>In your terminal, run: docker compose up --build -d</li></ul>
+<li>Populate the database by executing the ingestion script.</li>
+<ul><li>In your terminal, run: docker exec -it meal_api python ingest.py</li></ul>
+<li>Test local endpoints.</li>
+<ul><li>For Swagger UI visit: <a href="http://localhost:8000/docs">http://localhost:8000/docs</a> </li>
+<li>Terminal request: curl "http://localhost:8000/recipes?category=seafood&limit=5"</li></ul>
+<li>Stop and remove local containers.</li>
+<ul><li>In your terminal, run: docker compose down</li></ul>
+</ol>
