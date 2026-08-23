@@ -16,4 +16,17 @@
 <li>Uses 'meal_id' as a primary key so each recipe is unique and easy to find.</li>
 </ul>
 
+<h4>3. Web API (main.py)</h4>
+<ul>
+<li>Built with FastAPI to serve the data over HTTP.</li>
+<li>'/recipes': returns a list of recipes. Supports filtering by categories (such as 'seafood' or 'vegetarian') and setting a limit on how many recipes to return.</li>
+<li>'recipes/{meal_id}': Looks up and returns full details for one specific recipe.</li>
+<li>Includes safety checks so database connections close properly and errors return clear error messages instead of crashing the app.</li>
+</ul>
+
+<h4>4. Deployment (Docker & Render)</h4>
+<ul>
+<li>Docker: Wraps the app code so it runs the exact same way on a local server as it does in the cloud.</li>
+<li>Render: Hosts the database and API online for free so that anyone can test the endpoints live.</li>
+</ul>
 <p> </p>
