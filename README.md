@@ -82,7 +82,7 @@
 <p>Overall, I am really proud of this project - from everything I have learnt whilst working through it to delivering a set of live, working endpoints. Given more time, here is how I would improve the system:</p>
 
 <ul>
-<li><b>Automated testing: </b>Implement a comprehensive test suite using pytest to validate ingestion processes and API endpoints automatically before deployment. Incorporate the test suite into GitHub actions so it triggers at every push - acts as another layer of safety in verifying the code.</li>
+<li><b>Automated testing: </b>Implement a comprehensive test suite using pytest to validate ingestion processes and API endpoints before deployment. Incorporate the test suite into GitHub actions so it triggers automatically at every push - acts as another layer of safety in verifying the code.</li>
 
 <li><b> Interactive Frontend: </b>Build a user-friendly web interface (using React or Streamlit) that allows non-technical users to filter recipes by categories or ingredients, view recipe cards visually and submit their own custom recipes via a submission form.</li>
 
