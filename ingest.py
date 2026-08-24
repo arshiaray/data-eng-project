@@ -152,8 +152,8 @@ def main_pipeline():
             meal_name = EXCLUDED.meal_name,
             category = EXCLUDED.category,
             area = EXCLUDED.area,
-            instructions = EXCLUDED.instructions,
             ingredients = EXCLUDED.ingredients,
+            instructions = EXCLUDED.instructions,
             thumbnail_url = EXCLUDED.thumbnail_url;
     """
 
