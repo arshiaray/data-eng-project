@@ -35,7 +35,7 @@
 
 <ul>
 <li><b>Data Ingestion: </b>'ingest.py' fetches raw JSON from The MealDB API, extracts key fields, and loads them safely into PostgreSQL.</li>
-<li><b>Idempotent Data Loads: </b>Re-running the ingestion script safely skips existing records ('ON CONFLICT DO NOTHING') without throwing primary key errors.</li>
+<li><b>Idempotent Data Loads: </b>Re-running the ingestion script safely updates existing records ('ON CONFLICT DO UPDATE') without throwing primary key errors.</li>
 <li><b>Recipe Filtering API:</b> 'GET /recipes' returns formatted JSON data and supports optional 'category' filtering (case-insensitive) and custom ‘limit’ parameters.</li>
 <li><b>Single Recipe Lookup:</b> 'GET /recipes/{meal_id}' fetches full details for a specific recipe and returns a ‘404 Not Found’ error if the ID doesn't exist.</li>
 <li><b>Database Safety and Error Handling:</b> Explicit connection handling ('try/except/finally' blocks) prevents database connection leaks and returns  HTTP ‘500’ JSON errors if PostgreSQL becomes unreachable.</li>
