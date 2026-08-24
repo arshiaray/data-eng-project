@@ -36,11 +36,14 @@
 <ul>
 <li><b>Data Ingestion: </b>'ingest.py' fetches raw JSON from The MealDB API, extracts key fields, and loads them safely into PostgreSQL.</li>
 <li><b>Idempotent Data Loads: </b>Re-running the ingestion script safely skips existing records ('ON CONFLICT DO NOTHING') without throwing primary key errors.</li>
-<li><b>Recipe Filtering API:</b> 'GET /recipes' returns formatted JSON data and supports optional 'category' filtering (case-insensitive) and custom `limit` parameters.</li>
-<li><b>Single Recipe Lookup:</b> 'GET /recipes/{meal_id}' fetches full details for a specific recipe and returns a structured `404 Not Found` error if the ID doesn't exist.</li>
-<li><b>Database Safety and Error Handling:</b> Explicit connection handling ('try/except/finally' blocks) prevents database connection leaks and returns clean HTTP `500` JSON errors if PostgreSQL becomes unreachable.</li>
+<li><b>Recipe Filtering API:</b> 'GET /recipes' returns formatted JSON data and supports optional 'category' filtering (case-insensitive) and custom ‘limit’ parameters.</li>
+<li><b>Single Recipe Lookup:</b> 'GET /recipes/{meal_id}' fetches full details for a specific recipe and returns a ‘404 Not Found’ error if the ID doesn't exist.</li>
+<li><b>Database Safety and Error Handling:</b> Explicit connection handling ('try/except/finally' blocks) prevents database connection leaks and returns  HTTP ‘500’ JSON errors if PostgreSQL becomes unreachable.</li>
 <li><b>Automated Cloud Deployment:</b> Fully containerised with Docker and live on Render with automated deployments on every 'Git Push'</li>
+<li><b>CI/CD Automation: </b>Utilised GitHub Actions and wrote a workflow to verify the code and Docker configuration before automated Render deployment on every push.</li>
 </ul>
+
+
 
 <h4>Considerations</h4>
 <ul>
@@ -79,7 +82,7 @@
 <p>Overall, I am really proud of this project - from everything I have learnt whilst working through it to delivering a set of live, working endpoints. Given more time, here is how I would improve the system:</p>
 
 <ul>
-<li><b>Automated testing: </b>Implement a comprehensive test suite using pytest to validate ingestion processes and API endpoints automatically before deployment.</li>
+<li><b>Automated testing: </b>Implement a comprehensive test suite using pytest to validate ingestion processes and API endpoints automatically before deployment. Incorporate the test suite into GitHub actions so it triggers at every push - acts as another layer of safety in verifying the code.</li>
 
 <li><b> Interactive Frontend: </b>Build a user-friendly web interface (using React or Streamlit) that allows non-technical users to filter recipes by categories or ingredients, view recipe cards visually and submit their own custom recipes via a submission form.</li>
 
