@@ -75,5 +75,13 @@
 <ul><li>In your terminal, run: docker compose down</li></ul>
 </ol>
 
-<u><h4>IMPROVEMENTS</h4></u>
-<p>Overall, I am super happy with this project, from everything I've learned to the outcome of a set of working endpoints. With more time, these are the things I would do to improve on my project:</p>
+<u><h3>IMPROVEMENTS</h3></u>
+<p>Overall, I am really proud of this project - from everything I have learnt whilst working through it to delivering a set of live, working endpoints. Given more time, here is how I would improve the system:</p>
+
+<ul>
+<li><b>Automated testing: </b>Implement a comprehensive test suite using pytest to validate ingestion processes and API endpoints automatically before deployment.</li>
+
+<li><b> Interactive Frontend: </b>Build a user-friendly web interface (using React or Streamlit) that allows non-technical users to filter recipes by categories or ingredients, view recipe cards visually and submit their own custom recipes via a submission form.</li>
+
+<li><b>Multi-ingredient search API Endpoint:</b> Build an endpoint that leverages the JSONB format of the 'ingredients' field to support multi-ingredient searches. E.g. 'GET /recipes/search?ingredients=chicken,spinach,garlic'. </li>
+</ul>
